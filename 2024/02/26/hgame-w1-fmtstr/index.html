@@ -178,7 +178,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="color: #ffa2c4">格式化字符串</a>
+                <a href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="color: #ff7d73">格式化字符串</a>
             </span>
             
         </span>
@@ -192,7 +192,7 @@
 <h2 id="1-代码分析"><a class="header-anchor" href="#1-代码分析">¶</a>1.代码分析</h2>
 <hr>
 <h3 id="checksec"><a class="header-anchor" href="#checksec">¶</a>checksec</h3>
-<p><img src="/.io//%5Cpic%5Cimage-20240226172807758.png" alt="image-20240226172807758"></p>
+<p><img src="/2024/02/26/hgame-w1-fmtstr//image-20240226172807758.png" alt="image-20240226172807758"></p>
 <p>没开PIE和RELRO保护，故got表可写，且不需要考虑泄露地址。</p>
 <h3 id="IDA反汇编"><a class="header-anchor" href="#IDA反汇编">¶</a>IDA反汇编</h3>
 <p>运行逻辑也很简单，main函数调用vuln函数，在vuln函数中，先读入最多0x50个字节到栈中，调用strchr函数检查字符串中是否包含’p’和’s’，若不包含则直接printf。<br>
@@ -218,7 +218,7 @@ vuln函数内容如下</p>
 <p>先查看一下栈分布的情况，查找可利用的地址。</p>
 <blockquote>
 <p>read前:<br>
-<img src="/.io//%5Cpic%5Cimage-20240226194457383.png" alt="image-20240226194457383"></p>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226194457383.png" alt="image-20240226194457383"></p>
 </blockquote>
 <p>可以发现，[rsp+60h]处存放着此时rbp所指向的地址，自然而然便可以通过此处<strong>修改[rbp-0h]的值</strong>，使得调用</p>
 <pre><code class="language-assembly">pop rbp
@@ -241,9 +241,9 @@ ret
 </code></pre>
 <blockquote>
 <p>read后栈分布情况如下：<br>
-<img src="/.io//%5Cpic%5Cimage-20240226201429244.png" alt="image-20240226201429244"><br>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226201429244.png" alt="image-20240226201429244"><br>
 printf后栈分布情况如下：<br>
-<img src="/.io//%5Cpic%5Cimage-20240226202146136.png" alt="image-20240226202146136"></p>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226202146136.png" alt="image-20240226202146136"></p>
 </blockquote>
 <p>若rsp最低位为10h即可成功ret到sys函数中（本文图例非成功情况，别问为什么没放成功情况的图，绝对不是凹不出来orz）</p>
 <h2 id="3-全部代码"><a class="header-anchor" href="#3-全部代码">¶</a>3.全部代码</h2>
