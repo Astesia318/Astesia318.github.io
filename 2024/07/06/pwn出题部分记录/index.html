@@ -178,7 +178,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%87%BA%E9%A2%98/" style="color: #03a9f4">出题</a>
+                <a href="/tags/%E5%87%BA%E9%A2%98/" style="color: #ffa2c4">出题</a>
             </span>
             
         </span>
@@ -186,17 +186,17 @@
     </div>
     
     <div class="content" v-pre>
-        <p>在pwn简单题圈子里混了这么久，终于要第一次出题了，但是依旧有很多陌生的东西没接触过，所以这篇博客总结了一些出题过程中涉及到的点。</p>
+        <p>在pwn简单题圈子里混了这么久，终于要第一次出题了，但是依旧有很多陌生的东西没接触过，所以这篇博客总结了一些出题过程中涉及到的点。（持续更新）</p>
 <span id="more"></span>
 <h2 id="1-gcc编译选项"><a class="header-anchor" href="#1-gcc编译选项">¶</a>1. gcc编译选项</h2>
 <hr>
-<p>通过编译选项可以直接打开或关闭程序的四项保护，默认全开，这里只记录如何关闭：</p>
+<p>通过编译选项可以直接打开或关闭程序的四项保护，默认全开，这里记录如何关闭/打开：</p>
 <blockquote>
 <ul>
-<li>canary：-fno-stack-protector</li>
-<li>NX：-z execstack</li>
-<li>PIE:  -no-pie</li>
-<li>RELRO：-z lazy（延迟绑定）、-z norelro（完全关闭）</li>
+<li>canary：-fno-stack-protector/-fstack-protector</li>
+<li>NX：-z execstack/-z noexecstack</li>
+<li>PIE:  -no-pie/-pie</li>
+<li>RELRO：-z lazy（延迟绑定）、-z norelro（完全关闭）、-z now</li>
 </ul>
 </blockquote>
 <p>在引入一些外来库时需要添加额外的选项，以下为博主遇到的例子：</p>
@@ -210,8 +210,12 @@
 <ul>
 <li>编译32位程序：-m32</li>
 <li>编译优化：-O0（default）、-O1、-O2、-O3（没尝试过区别）</li>
+<li>忽略警告信息：-w</li>
+<li>产生调试信息，gdb调试时显示c语言源码：-g</li>
+<li>使用位置无关代码（PIC）：-fPIC</li>
 </ul>
 </blockquote>
+<p>若想要使用高版本gcc编译出低版本GLIBC程序，则需要使用docker拉取一个旧版本Ubuntu镜像，在镜像中使用gcc编译，再将编译出的程序使用挂载卷取出。</p>
 <h2 id="2-docker的简单使用"><a class="header-anchor" href="#2-docker的简单使用">¶</a>2. docker的简单使用</h2>
 <hr>
 <p>众所周知，pwn题最需要保证无误的是依赖文件和环境，因此便需要用到docker来制作对应的镜像以保存题目环境。不得不说实践是学习技术最有效的方式了，出题前一直搞不懂docker怎么用的。在这里梳理一下关于docker的一些指南。</p>
@@ -257,6 +261,25 @@
 </tbody>
 </table>
 <p>目前这些命令足以完成pwn题目创建的一套流程，可以检测远程环境能否如愿打通。</p>
+<h3 id="其他可能用到的命令或选项"><a class="header-anchor" href="#其他可能用到的命令或选项">¶</a>其他可能用到的命令或选项</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">command</th>
+<th style="text-align:center">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>docker  run --rm</strong></td>
+<td style="text-align:center">容器停止后自动删除容器</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>docker run -v {host_dir:container_dir}</strong></td>
+<td style="text-align:center">为容器挂载卷</td>
+</tr>
+</tbody>
+</table>
 <h3 id="其他问题"><a class="header-anchor" href="#其他问题">¶</a>其他问题</h3>
 <p>由于docker hub的功成身退（悲），在拉取ubuntu镜像时可能会报错，我们可以使用国内的镜像网站进行替代，这里记录一下博主的配置：</p>
 <p>首先打开以下配置文件：</p>
